@@ -59,7 +59,7 @@ window.loadPixels = (data) ->
 
             pixel.hsl = d3.hsl pixel.rgb
             pixel.hcl = d3.hcl pixel.rgb
-            pixel.hcl.h -= 90 # red at top point
+            pixel.hsl.h -= 90 # red at top point
             pixel.hcl.h -= 25 + 90 # correction
 
             m = 2 * (0.5 - Math.abs(pixel.hsl.l - 0.5))
