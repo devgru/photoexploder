@@ -45,8 +45,8 @@ window.loadPixels = (data) ->
     cl_hsl = prepareCanvas 'cl_hsl', diagramFullSize, diagramFullSize
     hs = prepareCanvas 'hs', diagramFullSize, diagramFullSize
     hc = prepareCanvas 'hc', diagramFullSize, diagramFullSize 
-    hl1 = prepareCanvas 'hl1', diagramFullSize, diagramFullSize
-    hl2 = prepareCanvas 'hl2', diagramFullSize, diagramFullSize
+    hl_hcl = prepareCanvas 'hl_hcl', diagramFullSize, diagramFullSize
+    hl_hsl = prepareCanvas 'hl_hsl', diagramFullSize, diagramFullSize
 
     animate = (y) -> ->
         for x in [0...width]
@@ -75,8 +75,8 @@ window.loadPixels = (data) ->
             cl_hsl.fillPixel pixel.rgb, hsl_chroma * diagramFullSize, diagramFullSize - pixel.hsl.l * diagramFullSize
             hc.fillPixel pixel.rgb, (diagramHalfSize + pixel.hcl.c * (Math.cos rad pixel.hcl.h)), (diagramHalfSize + pixel.hcl.c * (Math.sin rad pixel.hcl.h))
             hs.fillPixel pixel.rgb, (diagramHalfSize + 100 * hsl_chroma * (Math.cos rad pixel.hsl.h)), (diagramHalfSize + 100 * hsl_chroma * (Math.sin rad pixel.hsl.h))
-            hl1.fillPixel pixel.rgb, (diagramHalfSize + pixel.hcl.l * (Math.cos rad pixel.hcl.h)), (diagramHalfSize + pixel.hcl.l * (Math.sin rad pixel.hcl.h))
-            hl2.fillPixel pixel.rgb, (diagramHalfSize + 100 * pixel.hsl.l * (Math.cos rad pixel.hsl.h)), (diagramHalfSize + 100 * pixel.hsl.l * (Math.sin rad pixel.hsl.h))
+            hl_hcl.fillPixel pixel.rgb, (diagramHalfSize + pixel.hcl.l * (Math.cos rad pixel.hcl.h)), (diagramHalfSize + pixel.hcl.l * (Math.sin rad pixel.hcl.h))
+            hl_hsl.fillPixel pixel.rgb, (diagramHalfSize + 100 * pixel.hsl.l * (Math.cos rad pixel.hsl.h)), (diagramHalfSize + 100 * pixel.hsl.l * (Math.sin rad pixel.hsl.h))
             #rows[y][x] = pixel
             #columns[x][y] = pixel
             #pixels.push pixel
