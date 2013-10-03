@@ -7,8 +7,8 @@ window.dataUrlToImageData = (dataUrl, cb) ->
     img.onload = -> 
         console.log 'image onload'
         canvas = document.createElement 'canvas'
-        console.log document.width, img.width
-        width = Math.min document.width, img.width
+        console.log document.body.clientWidth, img.width
+        width = Math.min document.body.clientWidth, img.width
         canvas.width = width
         canvas.height = img.height * width / img.width
         image = canvas.getContext '2d'
