@@ -41,7 +41,8 @@ window.loadPixels = (data) ->
     # 128 + 128 + 1, for circle
     
     sl = prepareCanvas 'sl', diagramFullSize, diagramFullSize
-    cl = prepareCanvas 'cl', diagramFullSize, diagramFullSize
+    cl_hcl = prepareCanvas 'cl_hcl', diagramFullSize, diagramFullSize
+    cl_hsl = prepareCanvas 'cl_hsl', diagramFullSize, diagramFullSize
     hs = prepareCanvas 'hs', diagramFullSize, diagramFullSize
     hc = prepareCanvas 'hc', diagramFullSize, diagramFullSize 
     hl1 = prepareCanvas 'hl1', diagramFullSize, diagramFullSize
@@ -67,10 +68,11 @@ window.loadPixels = (data) ->
             console.log 'hcl broken on', pixel if isNaN pixel.hcl.h or isNaN pixel.hcl.c or isNaN pixel.hcl.l
             console.log 'hsl broken on', pixel if isNaN pixel.hsl.h or isNaN pixel.hsl.s or isNaN pixel.hsl.l
             
+            sl.fillPixel pixel.rgb, pixel.hsl.s * diagramFullSize, diagramFullSize - pixel.hsl.l * diagramFullSize
             image.fillPixel pixel.rgb, x, y
-            cl.fillPixel pixel.rgb, 2 * pixel.hcl.c, 2 * pixel.hcl.l
+            cl_hcl.fillPixel pixel.rgb, 2 * pixel.hcl.c, diagramFullSize -  2 * pixel.hcl.l
             hsl_chroma = pixel.hsl.s * m
-            sl.fillPixel pixel.rgb, hsl_chroma * 255, pixel.hsl.l * 255
+            cl_hsl.fillPixel pixel.rgb, hsl_chroma * diagramFullSize, diagramFullSize - pixel.hsl.l * diagramFullSize
             hc.fillPixel pixel.rgb, (diagramHalfSize + pixel.hcl.c * (Math.cos rad pixel.hcl.h)), (diagramHalfSize + pixel.hcl.c * (Math.sin rad pixel.hcl.h))
             hs.fillPixel pixel.rgb, (diagramHalfSize + 100 * hsl_chroma * (Math.cos rad pixel.hsl.h)), (diagramHalfSize + 100 * hsl_chroma * (Math.sin rad pixel.hsl.h))
             hl1.fillPixel pixel.rgb, (diagramHalfSize + pixel.hcl.l * (Math.cos rad pixel.hcl.h)), (diagramHalfSize + pixel.hcl.l * (Math.sin rad pixel.hcl.h))
