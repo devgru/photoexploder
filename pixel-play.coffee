@@ -32,9 +32,7 @@ window.loadPixels = (data) ->
     bytes = data.data
     width = data.width
     height = data.height
-    #rows = []
-    #columns = []
-    #pixels = []
+
         
     image = prepareCanvas 'image', width, height
     
@@ -48,12 +46,7 @@ window.loadPixels = (data) ->
     hc = prepareCanvas 'hc', diagramFullSize, diagramFullSize 
     hl1 = prepareCanvas 'hl1', diagramFullSize, diagramFullSize
     hl2 = prepareCanvas 'hl2', diagramFullSize, diagramFullSize
-    ###
-    for y in [0...height]
-        rows[y] = []
-    for x in [0...width]
-        columns[x] = []
-    ###
+
     animate = (y) -> ->
         for x in [0...width]
             pixel =
@@ -87,43 +80,4 @@ window.loadPixels = (data) ->
             #pixels.push pixel
         requestAnimationFrame animate y + 1 if y + 1 < height
     requestAnimationFrame animate 0
-    ###
-    svg = d3
-        .select('svg')
-        
-    rects = svg
-        .selectAll('rect')
-        .data(pixels)
-        .enter()
-        .append('rect')
-        
-    rects
-        .attr('width', 1)
-        .attr('height', 1)
-        .attr('x', (pixel) -> pixel.x)
-        .attr('y', (pixel) -> pixel.y)
-        .attr('fill', (pixel) -> pixel.rgb)
-    ###
-showSL = ->
-    rects
-        .transition()
-        .duration(2000)
-        .attr('x', (pixel) ->
-            m = 2 * (0.5 - Math.abs(pixel.hsl.l - 0.5))
-            (pixel.hsl.s * (width - 1)) * m
-        )
-        .attr('y', (pixel) ->
-            pixel.hsl.l * (height - 1)
-        )
-showXY = ->
-    rects
-        .transition()
-        .duration(2000)
-        .attr('x', (pixel) -> pixel.x)
-        .attr('y', (pixel) -> pixel.y)
-$('#xy').on 'click', showXY
-$('#sl').on 'click', showSL
-$('form').submit ->
-    img.src = 'img.php?' + $(this).serialize()
-    
-    false
+
