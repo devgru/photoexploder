@@ -92,8 +92,8 @@ window.loadPixels = (data) ->
     animate = (y) -> ->
         for x in [0...width]
             pixel = createPixel x, y
-            rows[y][x] = pixel
-            columns[x][y] = pixel
+            #rows[y][x] = pixel
+            #columns[x][y] = pixel
             drawPixel pixel
         if y + 1 < height
             requestAnimationFrame animate y + 1
