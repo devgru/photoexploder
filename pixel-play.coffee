@@ -84,11 +84,11 @@ window.loadPixels = (data) ->
     hl_hcl = prepareCanvas 'hl_hcl', fullSize, fullSize
     hl_hsl = prepareCanvas 'hl_hsl', fullSize, fullSize
 
-    average_columns = prepareCanvas 'columns', width, fullSize
-    average_rows    = prepareCanvas 'rows',    fullSize, height
+    #average_columns = prepareCanvas 'columns', width, fullSize
+    #average_rows    = prepareCanvas 'rows',    fullSize, height
         
-    columns[x] = [] for x in [0...width]
-    rows[y] = [] for y in [0...height]
+    #columns[x] = [] for x in [0...width]
+    #rows[y] = [] for y in [0...height]
     animate = (y) -> ->
         for x in [0...width]
             pixel = createPixel x, y
@@ -97,8 +97,8 @@ window.loadPixels = (data) ->
             drawPixel pixel
         if y + 1 < height
             requestAnimationFrame animate y + 1
-        else
-            requestAnimationFrame buildStatictics
+        #else
+            #requestAnimationFrame buildStatictics
     
     buildStatictics = ->
         average.rows = rows.map (row) -> row.average()
